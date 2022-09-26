@@ -5,10 +5,46 @@ import DeleteProducts from './DeleteProducts'
 const ProductList = (props) => {
     const updateProd=()=>{
         alert("u")
+        // axios.post('/user', {
+        //   firstName: 'Fred',
+        //   lastName: 'Flintstone'
+        // })
+        // .then(function (response) {
+        //   console.log(response);
+        // })
+        // .catch(function (error) {
+        //   console.log(error);
+        // });
       }
       const deleteProd=()=>{
         alert("d")
+        // axios.post('/user', {
+        //   firstName: 'Fred',
+        //   lastName: 'Flintstone'
+        // })
+        // .then(function (response) {
+        //   console.log(response);
+        // })
+        // .catch(function (error) {
+        //   console.log(error);
+        // });
       }
+
+
+  const listProd = () =>{
+  //   axios.get('/product')
+  // .then(function (response) {
+  //   // handle success
+  //   console.log(response);
+  // })
+  // .catch(function (error) {
+  //   // handle error
+  //   console.log(error);
+  // })
+  // .then(function () {
+  //   // always executed
+  // })
+  }
   return (
 
     <Table striped bordered hover>

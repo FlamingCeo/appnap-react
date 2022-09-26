@@ -1,6 +1,7 @@
 import React from 'react'
 import {useState} from 'react';
-const Login = (props) => {
+const axios = require('axios');
+const Registration = (props) => {
     const[email,setEmail] = useState('')
     const[password,setPassword] = useState('')
     const[confirmedPassword,setConfirmedPassword] = useState('')
@@ -15,6 +16,16 @@ const Login = (props) => {
         }
 
       //  props.login({name,price,category})
+        //  axios.post('/user', {
+  //   firstName: 'Fred',
+  //   lastName: 'Flintstone'
+  // })
+  // .then(function (response) {
+  //   console.log(response);
+  // })
+  // .catch(function (error) {
+  //   console.log(error);
+  // });
         setEmail('')
         setPassword('')
     }
@@ -38,4 +49,4 @@ const Login = (props) => {
 //     title: PropTypes.string.isRequired
 // }
 
-export default Login
+export default Registration
