@@ -1,23 +1,31 @@
-import logo from './logo.svg';
 import './App.css';
+import NewProducts from './components/NewProducts';
+import ProductList from './components/ProductList';
+// import Registration from './components/Registration';
+
+
 
 function App() {
+
+  const createProd=()=>{
+    alert("c")
+  }
+  
+
+  const newProduct=(e)=>{
+   alert(e.name)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className = "m-5">
+      <NewProducts
+        newProduct = {newProduct}
+      />
+
+       <ProductList
+        
+       />
+
     </div>
   );
 }
