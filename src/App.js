@@ -76,7 +76,7 @@ function App() {
         // always executed
           setTimeout(() => {
             setAlert(false)
-          }, 4000);
+          }, 3000);
 
       });
   };

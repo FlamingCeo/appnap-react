@@ -1,12 +1,17 @@
 import React from "react";
 import { useState } from "react";
+import AlertBox from "./messages/AlertBox";
+
 const axios = require("axios");
 const Registration = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [password_confirmation, setConfirmedPassword] = useState("");
+  const [showAlert, setAlert] = useState(false);
+  const [responseBlock, setResponse] = useState("");
 
   const submitForm = () => {
+
     if (!email || !password || !password_confirmation) {
       alert("please complete the form");
     } else if (password != password_confirmation) {
@@ -23,14 +28,24 @@ const Registration = (props) => {
           console.log(response);
           setEmail("");
           setPassword("");
+          setAlert(true)
+          setResponse(response.data)
         })
         .catch(function (error) {
           console.log(error);
+          error.response.data["typeOf"] = "login"
+
+          setAlert(true)
+          setResponse(error.response)
         });
     }
   };
   return (
     <div className="m-5">
+      {
+        showAlert? <AlertBox block = {responseBlock}/>:""
+        
+      }
       <div>
         Email:{" "}
         <input
