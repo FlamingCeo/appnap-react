@@ -159,6 +159,33 @@ function App() {
     
   };
 
+  const logOut = (e) => {
+
+    var url = "http://127.0.0.1:8000/api/logout"
+    return axios(url, {
+      method: 'post',
+      headers: headers
+   
+    })
+    // axios
+    //   .post("http://127.0.0.1:8000/api/delete-prod", data)
+      .then(function (response) {
+        localStorage.removeItem('token');
+        localStorage.removeItem('userLoggedIn')
+
+        window.location.reload();
+
+      })
+ 
+      .catch(function (error) {
+        //console.log(error);
+        setAlert(true)
+        setResponse(error.response.data)
+      })
+
+    
+  };
+
   const restart = () => {
     setName("");
     setCategory("");
@@ -193,6 +220,9 @@ function App() {
         showAlert? <AlertBox block = {responseBlock}/>:""
         
       }
+      <div className = "float-right" onClick={logOut}>
+        <a className = "btn btn-primary">Log out</a>
+      </div>
       <NewProducts
         newProduct={newProduct}
         updateMode={updateMode}
