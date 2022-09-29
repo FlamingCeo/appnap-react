@@ -7,9 +7,7 @@ const axios = require('axios');
 
 const ProductList = (props) => {
 
-
-
-
+  var role =  localStorage.getItem('role');
   return (
 
 
@@ -24,17 +22,23 @@ const ProductList = (props) => {
               <td>{data.name}</td>
               <td>{data.price}</td>
               <td>{data.category}</td>
-            
+            {
+              role ==="admin"?
+              <>
               <td>       
-                <UpdateProducts
-                  update = {props.editProd}
-                />
-            </td>
-            <td>       
-                <DeleteProducts
-                  delete = {props.deleteProd}
-                />
-            </td>  
+              <UpdateProducts
+                update = {props.editProd}
+              />
+          </td>
+          <td>       
+              <DeleteProducts
+                delete = {props.deleteProd}
+              />
+          </td>
+          </>
+          : null
+            }
+  
             </tr>
               )
             })

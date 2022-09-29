@@ -24,7 +24,7 @@ const AlertBox = (props) => {
         })
     }
     if(props.block.hasOwnProperty('data')&&props.block.data.hasOwnProperty('typeOf')&&props.block.data.typeOf === "login"){
-        console.log("yes")
+        console.log("yes 4")
         var alertBoxMap = props.block.data.data;
         console.log(alertBoxMap)
        

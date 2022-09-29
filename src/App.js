@@ -20,6 +20,7 @@ function App() {
     'Authorization': "Bearer " + token
   }
 
+  var role =  localStorage.getItem('role');
 
 
   var [list, setList] = useState([]);
@@ -223,7 +224,10 @@ function App() {
       <div className = "float-right" onClick={logOut}>
         <a className = "btn btn-primary">Log out</a>
       </div>
-      <NewProducts
+
+      {
+        role =="admin"?
+        <NewProducts
         newProduct={newProduct}
         updateMode={updateMode}
         updateList={updateList}
@@ -235,7 +239,9 @@ function App() {
         setName={setName}
         setPrice={setPrice}
         setCategory={setCategory}
-      />
+      />: null
+      }
+
 
       <ProductList
         list={list}

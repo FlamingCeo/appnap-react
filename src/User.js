@@ -20,6 +20,7 @@ class User {
     authenticated(data, callback) {
         console.log(data)
         localStorage.setItem('userEmail', data[0].email)
+        localStorage.setItem('role', data[0].role)
         localStorage.setItem('userLoggedIn', true)
         localStorage.setItem('token', data.token)
     }
