@@ -1,47 +1,83 @@
-import React from 'react'
-import {useState} from 'react';
-const axios = require('axios');
+import React from "react";
+import user from "../User.js";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import AlertBox from "./messages/AlertBox";
 
+
+const axios = require("axios");
 
 const Login = (props) => {
-    const[email,setEmail] = useState('')
-    const[password,setPassword] = useState('')
-    const submitForm = () =>{
-        if(!email||!password){
-            alert("please complete the form")
-        }
+  let navigate = useNavigate();
 
-      //  props.login({name,price,category})
-        //  axios.post('/user', {
-  //   firstName: 'Fred',
-  //   lastName: 'Flintstone'
-  // })
-  // .then(function (response) {
-  //   console.log(response);
-  // })
-  // .catch(function (error) {
-  //   console.log(error);
-  // });
-        setEmail('')
-        setPassword('')
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showAlert, setAlert] = useState(false);
+  const [responseBlock, setResponse] = useState("");
+  const submitForm = (e) => {
+    e.preventDefault();
+
+    if (!email || !password) {
+      alert("please complete the form");
     }
+    const formData = new FormData(e.currentTarget);
+
+    const loginCredentials = {
+      email: formData.get("email"),
+      password: formData.get("password"),
+    };
+
+    //  props.login({name,price,category})
+    axios
+      .post("http://127.0.0.1:8000/api/login", loginCredentials)
+      .then(function (response) {
+        console.log(response);
+        user.authenticated(response.data);
+        window.location.href = "/";
+        setAlert(true)
+        setResponse(response.data)
+      })
+      .catch(function (error) {
+        console.log(error);
+        error.response.data["typeOf"] = "login"
+
+        setAlert(true)
+        setResponse(error.response)
+      });
+
+    setEmail("");
+    setPassword("");
+  };
   return (
-    <div className = "m-5">
-        <div>Email: <input className = "form-control" value = {email} onChange = {(e) =>setEmail(e.target.value)}/></div>
-        <div>Password: <input className = "form-control" type = "password" value = {password} onChange = {(e) =>setPassword(e.target.value)}/></div>
-        <button className = "btn btn-light m-2" onClick = {submitForm}>
-              Submit  
-        </button>               
+    
+    <div className="m-5">
+      {
+        showAlert? <AlertBox block = {responseBlock}/>:""
+        
+      }
+      <form onSubmit={submitForm}>
+        <div>
+          Email:{" "}
+          <input
+            className="form-control"
+            name="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+        <div>
+          Password:{" "}
+          <input
+            className="form-control"
+            name="password"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+        <button className="btn btn-light m-2">Submit</button>
+      </form>
     </div>
-  )
-}
-
-// Header.defaultProps = {
-//     title: "Task Tracker",
-// }
-
-// Header.propTypes = {
-//     title: PropTypes.string.isRequired
-// }
-
-export default Login
+  );
+};
+export default Login;

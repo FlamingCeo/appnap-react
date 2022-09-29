@@ -5,6 +5,7 @@ import {
     Route,
   } from "react-router-dom";
 import Login from './components/Login';
+import Registration from './components/Registration';
 import App from './App';
 import ProtectedRoute from './ProtectedRoute';
 
@@ -12,7 +13,6 @@ import ProtectedRoute from './ProtectedRoute';
 
 
 const RoutesList = () => {
-    const [user, setUser] = React.useState(1);
 
     return (
   
@@ -20,8 +20,10 @@ const RoutesList = () => {
     <BrowserRouter>
         <Routes>
         <Route path="/login" element={<Login />}/>
+        <Route path="/registration" element={<Registration />}/>
+
         <Route path="/"  element={
-            <ProtectedRoute user={user}>
+            <ProtectedRoute >
               <App />
             </ProtectedRoute>
           }/>

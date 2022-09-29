@@ -1,38 +1,51 @@
-import React from 'react'
-import {useState} from 'react';
+import React from "react";
+import { useState, useEffect } from "react";
+
 const NewProducts = (props) => {
-    const[name,setName] = useState('')
-    const[price,setPrice] = useState('')
-    const[category,setCategory] = useState('')
-
-    const submitForm = () =>{
-        if(!name||!price||!category){
-            alert("please complete the form")
-        }
-
-        props.newProduct({name,price,category})
-        setName('')
-        setPrice('')
-        setCategory('')
-    }
   return (
     <div>
-        <div>Name: <input className = "form-control" value={name} onChange = {(e) =>setName(e.target.value)}/></div>
-        <div>Price: <input className = "form-control" value = {price} onChange = {(e) =>setPrice(e.target.value)}/></div>
-        <div>Category: <input className = "form-control" value = {category} onChange = {(e) =>setCategory(e.target.value)}/></div>
-        <button className = "btn btn-light m-2" onClick = {submitForm}>
-              Submit  
-        </button>               
+      <form onSubmit={props.submitForm}>
+        <div>
+          Name:{" "}
+          <input
+            className="form-control"
+            value={props.name}
+            onChange={(e) => props.setName(e.target.value)}
+          />
+        </div>
+        <div>
+          Price:{" "}
+          <input
+            className="form-control"
+            value={props.price}
+            onChange={(e) => props.setPrice(e.target.value)}
+          />
+        </div>
+        <div>
+          Category:{" "}
+            <select value = {props.category} className = "form-control"  onChange={(e) => props.setCategory(e.target.value)}>
+              <option value="">Select Category</option>
+              <option value="Food">Food</option>
+              <option value="Gadget">Gadget</option>
+            </select>
+          {/* <input
+            className="form-control"
+            value={props.category}
+            onChange={(e) => props.setCategory(e.target.value)}
+          /> */}
+        </div>
+        <button className="btn btn-light m-2">
+          {props.updateMode ? "Update" : "Submit"}
+        </button>
+
+        {props.updateMode ? (
+          <button className="btn btn-light m-2" onClick={props.cancelForm}>
+            Cancel
+          </button>
+        ) : null}
+      </form>
     </div>
-  )
-}
+  );
+};
 
-// Header.defaultProps = {
-//     title: "Task Tracker",
-// }
-
-// Header.propTypes = {
-//     title: PropTypes.string.isRequired
-// }
-
-export default NewProducts
+export default NewProducts;
